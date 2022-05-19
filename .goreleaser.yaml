@@ -7,9 +7,25 @@ builds:
       - linux
       - windows
       - darwin
-    goarch:
-      - amd64
-      - arm64
+
+archives:
+  - replacements:
+      darwin: Darwin
+      linux: Linux
+      windows: Windows
+      386: i386
+      amd64: x86_64
+checksum:
+  name_template: 'checksums.txt'
+snapshot:
+  name_template: "{{ incpatch .Version }}-next"
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+
 brews:
   - name: multissh-go
     tap:
@@ -19,5 +35,4 @@ brews:
     homepage: "https://github.com/lcrownover/multissh-go"
     folder: Formula
     license: "MIT"
-
 
