@@ -8,6 +8,7 @@ before:
     - go generate ./...
 builds:
   - main: ./cmd/multissh/main.go
+    binary: multissh
     env:
       - CGO_ENABLED=0
     goos:
