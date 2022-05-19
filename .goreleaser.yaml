@@ -1,37 +1,15 @@
-# This is an example .goreleaser.yml file with some sensible defaults.
-# Make sure to check the documentation at https://goreleaser.com
-before:
-  hooks:
-    # You may remove this if you don't use go modules.
-    - go mod tidy
-    # you may remove this if you don't need go generate
-    - go generate ./...
+project_name: multissh-go
 builds:
   - main: ./cmd/multissh/main.go
     binary: multissh
-    env:
-      - CGO_ENABLED=0
+    env: [CGO_ENABLED=0]
     goos:
       - linux
       - windows
       - darwin
-archives:
-  - replacements:
-      darwin: Darwin
-      linux: Linux
-      windows: Windows
-      386: i386
-      amd64: x86_64
-checksum:
-  name_template: 'checksums.txt'
-snapshot:
-  name_template: "{{ incpatch .Version }}-next"
-changelog:
-  sort: asc
-  filters:
-    exclude:
-      - '^docs:'
-      - '^test:'
+    goarch:
+      - amd64
+      - arm64
 brews:
   - name: multissh-go
     tap:
